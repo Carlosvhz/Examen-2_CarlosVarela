@@ -89,7 +89,7 @@ public class Principal extends javax.swing.JFrame {
         lb_CrearPlayList = new javax.swing.JLabel();
         lb_verPlayList = new javax.swing.JLabel();
         lb_verFavoritos = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        lb_salir = new javax.swing.JLabel();
         jd_explorar = new javax.swing.JDialog();
         jPanel13 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -120,6 +120,14 @@ public class Principal extends javax.swing.JFrame {
         jtree_playList = new javax.swing.JTree();
         ppm_Eliminar = new javax.swing.JPopupMenu();
         mi_eliminar = new javax.swing.JMenuItem();
+        jd_favoritos = new javax.swing.JDialog();
+        jPanel17 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jl_favoritos = new javax.swing.JList<>();
+        bt_reproducir = new javax.swing.JButton();
+        ventanita = new javax.swing.JDialog();
+        jPanel18 = new javax.swing.JPanel();
+        lb_contador = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lb_usuarios = new javax.swing.JLabel();
@@ -625,6 +633,9 @@ public class Principal extends javax.swing.JFrame {
         lb_verFavoritos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_verFavoritos.setText("Ver favoritos");
         lb_verFavoritos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_verFavoritosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lb_verFavoritosMouseEntered(evt);
             }
@@ -633,8 +644,19 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("Salir");
+        lb_salir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_salir.setText("Salir");
+        lb_salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_salirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_salirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lb_salirMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -647,7 +669,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(lb_explorar, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_verPlayList, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_verFavoritos, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(lb_salir, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(178, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -662,7 +684,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lb_verFavoritos)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel20)
+                .addComponent(lb_salir)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -953,6 +975,86 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         ppm_Eliminar.add(mi_eliminar);
+
+        jPanel17.setBackground(new java.awt.Color(102, 102, 102));
+
+        jScrollPane8.setViewportView(jl_favoritos);
+
+        bt_reproducir.setText("Reproducir");
+        bt_reproducir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_reproducirMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(bt_reproducir)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(bt_reproducir)))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_favoritosLayout = new javax.swing.GroupLayout(jd_favoritos.getContentPane());
+        jd_favoritos.getContentPane().setLayout(jd_favoritosLayout);
+        jd_favoritosLayout.setHorizontalGroup(
+            jd_favoritosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_favoritosLayout.setVerticalGroup(
+            jd_favoritosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel18.setBackground(new java.awt.Color(0, 0, 0));
+
+        lb_contador.setFont(new java.awt.Font("Segoe UI Light", 0, 123)); // NOI18N
+        lb_contador.setForeground(new java.awt.Color(255, 255, 255));
+        lb_contador.setText("a");
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(lb_contador, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(lb_contador)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ventanitaLayout = new javax.swing.GroupLayout(ventanita.getContentPane());
+        ventanita.getContentPane().setLayout(ventanitaLayout);
+        ventanitaLayout.setHorizontalGroup(
+            ventanitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ventanitaLayout.setVerticalGroup(
+            ventanitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1590,6 +1692,49 @@ public class Principal extends javax.swing.JFrame {
         lb_verFavoritos.setForeground(Color.WHITE);
     }//GEN-LAST:event_lb_verFavoritosMouseExited
 
+    private void lb_verFavoritosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_verFavoritosMouseClicked
+        DefaultListModel modelo = new DefaultListModel();
+        for (Cancion cancion : usuarioActivado.getFavoritos()) {
+            modelo.addElement(cancion);
+        }
+        jl_favoritos.setModel(modelo);
+        jd_favoritos.pack();
+        jd_favoritos.setModal(true);
+        jd_favoritos.setLocationRelativeTo(null);
+        jd_favoritos.setVisible(true);
+    }//GEN-LAST:event_lb_verFavoritosMouseClicked
+
+    
+    ///Salir
+    private void lb_salirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_salirMouseEntered
+        lb_salir.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lb_salirMouseEntered
+
+    private void lb_salirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_salirMouseExited
+        lb_salir.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lb_salirMouseExited
+
+    private void lb_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_salirMouseClicked
+        JOptionPane.showMessageDialog(jd_SubMenu, "Adios "+usuarioActivado.getNombre());
+        usuarioActivado = null;
+        jd_SubMenu.dispose();
+    }//GEN-LAST:event_lb_salirMouseClicked
+
+    private void bt_reproducirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_reproducirMouseClicked
+        if (jl_favoritos.getSelectedIndex()>-1) {
+            DefaultListModel modelo = (DefaultListModel)jl_favoritos.getModel();
+            Cancion cancion = (Cancion)modelo.getElementAt(jl_favoritos.getSelectedIndex());
+            Reproducir reproducir = new Reproducir(lb_contador, cancion, ventanita);
+            reproducir.start();
+            ventanita.pack();
+            ventanita.setModal(true);
+            ventanita.setLocationRelativeTo(null);
+            ventanita.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(jd_favoritos, "Seleccione una cancion");
+        }
+    }//GEN-LAST:event_bt_reproducirMouseClicked
+
     
 
     public void recargarListasUsuario(){
@@ -1662,6 +1807,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton bt_añadirPlayList;
     private javax.swing.JButton bt_eliminarAlbum;
     private javax.swing.JButton bt_guardarCancion;
+    private javax.swing.JButton bt_reproducir;
     private javax.swing.JComboBox<String> cb_albumCancion;
     private javax.swing.JComboBox<String> cb_albumes;
     private javax.swing.JComboBox<String> cb_genero;
@@ -1676,7 +1822,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1693,6 +1838,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1708,6 +1855,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JDialog jd_LogIn;
@@ -1718,11 +1866,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_añadirPlayListCancion;
     private javax.swing.JDialog jd_crearCancion;
     private javax.swing.JDialog jd_explorar;
+    private javax.swing.JDialog jd_favoritos;
     private javax.swing.JDialog jd_verPlayList;
     private javax.swing.JList<String> jl_añadirCanciones;
     private javax.swing.JList<String> jl_cancionesdelAlbum;
     private javax.swing.JList<String> jl_eliminarAlbum;
     private javax.swing.JList<String> jl_eliminarUsuarios;
+    private javax.swing.JList<String> jl_favoritos;
     private javax.swing.JList<String> jl_listarAlbumes;
     private javax.swing.JList<String> jl_listarUsuarios;
     private javax.swing.JTree jtree_playList;
@@ -1731,8 +1881,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lb_albums;
     private javax.swing.JLabel lb_canciones;
     private javax.swing.JLabel lb_cargarUsuarios;
+    private javax.swing.JLabel lb_contador;
     private javax.swing.JLabel lb_explorar;
     private javax.swing.JLabel lb_gardarUsuarios;
+    private javax.swing.JLabel lb_salir;
     private javax.swing.JLabel lb_usuarios;
     private javax.swing.JLabel lb_verFavoritos;
     private javax.swing.JLabel lb_verPlayList;
@@ -1753,5 +1905,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nombrePlayList;
     private javax.swing.JTextField tf_userNameLogIn;
     private javax.swing.JTextField tf_username;
+    private javax.swing.JDialog ventanita;
     // End of variables declaration//GEN-END:variables
 }
