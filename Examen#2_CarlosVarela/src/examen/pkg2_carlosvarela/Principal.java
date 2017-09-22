@@ -1410,16 +1410,35 @@ public class Principal extends javax.swing.JFrame {
 
     private void jtree_playListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtree_playListMouseClicked
         if (evt.isMetaDown()) {
-            
+            try {
+                DefaultTreeModel modelo = (DefaultTreeModel)jtree_playList.getModel();
+                Object objeto = jtree_playList.getSelectionPath().getLastPathComponent();
+                if (objeto instanceof Cancion) {
+                    ppm_Eliminar.show(jtree_playList, evt.getX(), evt.getY());
+                }
+            } catch (Exception e) {
+                System.out.println("Error al obtener nodo en Jtree de vista de playList");
+                e.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jtree_playListMouseClicked
 
     private void mi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_eliminarActionPerformed
-        
+        try {
+            DefaultTreeModel modelo = (DefaultTreeModel)jtree_playList.getModel();
+            Object objeto = jtree_playList.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode n = (DefaultMutableTreeNode)objeto;
+            n.removeFromParent();
+            modelo.reload();
+        } catch (Exception e) {
+            System.out.println("Error al eliminar objeto en Jtree de vista de playList");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_mi_eliminarActionPerformed
 
     
 
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
