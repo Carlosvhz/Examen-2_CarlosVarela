@@ -67,6 +67,10 @@ public class Usuario {
         this.favoritos = favoritos;
     }
 
+    public void añadirFavorito(Cancion cancion){
+        this.favoritos.add(cancion);
+    }
+    
     public ArrayList<PlayList> getPlayLists() {
         return playLists;
     }
@@ -75,5 +79,8 @@ public class Usuario {
         this.playLists = playLists;
     }
     
+    public void añadirPlayList(PlayList playList){
+        this.playLists.add(playList);
+    }
     
 }

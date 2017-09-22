@@ -14,4 +14,32 @@ import java.util.ArrayList;
 public class PlayList {
     
     private ArrayList<Cancion> Canciones = new ArrayList();
+    private String nombre;
+    
+    public PlayList() {
+    }
+
+    public PlayList(String nombre, ArrayList canciones){
+        this.nombre = nombre;
+        this.Canciones = canciones;
+    }
+    
+    public ArrayList<Cancion> getCanciones() {
+        return Canciones;
+    }
+
+    public void setCanciones(ArrayList<Cancion> Canciones) {
+        this.Canciones = Canciones;
+    }
+    
+    public void añadirCancion(Cancion cancion){
+        this.Canciones.add(cancion);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayList: "+nombre;
+    }
+    
+    
 }
