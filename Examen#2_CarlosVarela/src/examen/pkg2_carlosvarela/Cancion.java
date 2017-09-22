@@ -9,13 +9,8 @@ package examen.pkg2_carlosvarela;
  *
  * @author carlo
  */
-public class Examen2_CarlosVarela {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Cancion {
     
+    private String nombre, artista, genero;
+    private int duracion;
 }
