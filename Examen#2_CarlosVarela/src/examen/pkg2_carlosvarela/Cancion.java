@@ -5,11 +5,13 @@
  */
 package examen.pkg2_carlosvarela;
 
+import java.io.Serializable;
+
 /**
  *
  * @author carlo
  */
-public class Cancion {
+public class Cancion implements Serializable{
     
     private String nombre, artista, genero;
     private int duracion;

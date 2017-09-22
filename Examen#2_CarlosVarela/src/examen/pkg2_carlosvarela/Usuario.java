@@ -5,13 +5,14 @@
  */
 package examen.pkg2_carlosvarela;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author carlo
  */
-public class Usuario {
+public class Usuario implements Serializable{
     
     private String nombre, username, password;
     private int edad;
@@ -82,5 +83,11 @@ public class Usuario {
     public void añadirPlayList(PlayList playList){
         this.playLists.add(playList);
     }
+
+    @Override
+    public String toString() {
+        return username;
+    }
+    
     
 }

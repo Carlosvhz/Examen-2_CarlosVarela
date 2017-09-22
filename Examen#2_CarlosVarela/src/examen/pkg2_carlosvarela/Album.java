@@ -5,13 +5,14 @@
  */
 package examen.pkg2_carlosvarela;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author carlo
  */
-public class Album {
+public class Album implements Serializable{
     
     private String nombre, artista;
     private ArrayList<Cancion> canciones = new ArrayList();

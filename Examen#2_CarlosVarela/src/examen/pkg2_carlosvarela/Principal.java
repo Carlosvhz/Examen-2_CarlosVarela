@@ -16,8 +16,12 @@ public class Principal extends javax.swing.JFrame {
     ArrayList<Album> albumes = new ArrayList();
     ArrayList<Cancion> canciones = new ArrayList();
     Cancion cancionañadir;
+    Administrador administrador = new Administrador();
+    
     public Principal() {
         initComponents();
+        administrador.setAlbumes(albumes);
+        administrador.setUsuarios(Usuarios);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_eliminarUsuarios = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        bt_Eliminarusuario = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_listarUsuarios = new javax.swing.JList<>();
@@ -67,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jl_listarAlbumes = new javax.swing.JList<>();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jl_eliminarAlbum = new javax.swing.JList<>();
@@ -120,10 +124,10 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lb_usuarios = new javax.swing.JLabel();
         lb_canciones = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lb_cargarUsuarios = new javax.swing.JLabel();
         lb_albums = new javax.swing.JLabel();
         lb_LogIn = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lb_gardarUsuarios = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 102));
         jPanel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -131,7 +135,12 @@ public class Principal extends javax.swing.JFrame {
         jl_eliminarUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jScrollPane2.setViewportView(jl_eliminarUsuarios);
 
-        jButton1.setText("Eliminar");
+        bt_Eliminarusuario.setText("Eliminar");
+        bt_Eliminarusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_EliminarusuarioMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -143,7 +152,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bt_Eliminarusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
         );
         jPanel4Layout.setVerticalGroup(
@@ -152,7 +161,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bt_Eliminarusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -440,8 +449,8 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(102, 102, 102));
 
-        jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jScrollPane3.setViewportView(jList1);
+        jl_listarAlbumes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jScrollPane3.setViewportView(jl_listarAlbumes);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -968,9 +977,20 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Cargar Usuarios");
+        lb_cargarUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_cargarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        lb_cargarUsuarios.setText("Cargar Usuarios");
+        lb_cargarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_cargarUsuariosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_cargarUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lb_cargarUsuariosMouseExited(evt);
+            }
+        });
 
         lb_albums.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lb_albums.setForeground(new java.awt.Color(255, 255, 255));
@@ -1002,9 +1022,20 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Guardar Usuarios");
+        lb_gardarUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_gardarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        lb_gardarUsuarios.setText("Guardar Usuarios");
+        lb_gardarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_gardarUsuariosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_gardarUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lb_gardarUsuariosMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1016,9 +1047,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(lb_LogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_canciones, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_cargarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_albums, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_gardarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1033,9 +1064,9 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lb_LogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_gardarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_cargarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
 
@@ -1079,6 +1110,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_usuariosMouseExited
 
     private void lb_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_usuariosMouseClicked
+        recargarListasUsuario();
         jd_Usuarios.pack();
         jd_Usuarios.setModal(true);
         jd_Usuarios.setLocationRelativeTo(null);
@@ -1137,6 +1169,7 @@ public class Principal extends javax.swing.JFrame {
                 tf_username.setText("");
                 pf_password.setText("");
                 sp_edad.setValue(0);
+                recargarListasUsuario();
             }
         } catch (Exception e) {
             System.out.println("Sucedio un problema");
@@ -1157,6 +1190,12 @@ public class Principal extends javax.swing.JFrame {
     private void lb_cancionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cancionesMouseClicked
         if (usuarioActivado!=null) {
             if (albumes.size()>0) {
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                for (Album album : albumes) {
+                    modelo.addElement(album);
+                }
+                cb_albumCancion.setModel(modelo);
+                
                 tf_nombreCancion.setText("");
                 tf_artistaCancion.setText("");
                 cb_genero.setSelectedIndex(0);
@@ -1199,7 +1238,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void lb_albumsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_albumsMouseClicked
         if (usuarioActivado!=null) {
-            
+            recargarListasAlbum();
+            jd_albumes.pack();
+            jd_albumes.setModal(true);
+            jd_albumes.setLocationRelativeTo(null);
+            jd_albumes.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Inicie sesion");
         }
@@ -1210,25 +1253,24 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_albumes, "Llene los requisitos");
         }else{
             albumes.add(new Album(tf_nombreAlbum.getText(), tf_artistaAlbum.getText()));
-            
             JOptionPane.showMessageDialog(jd_albumes, "Album agregado");
+            recargarListasAlbum();
             tf_nombreAlbum.setText("");
             tf_artistaAlbum.setText("");
         }
     }//GEN-LAST:event_bt_agregarAlbumMouseClicked
 
-    ////////////////////////////////////Falta eliminar todas las canciones
     private void bt_eliminarAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_eliminarAlbumMouseClicked
-        if (jl_eliminarAlbum.getSelectedIndex()>0) {
+        if (jl_eliminarAlbum.getSelectedIndex()>-1) {
             try {
                 DefaultListModel modelo = (DefaultListModel)jl_eliminarAlbum.getModel();
                 Album eliminarAlbum = (Album)modelo.getElementAt(jl_eliminarAlbum.getSelectedIndex());
-                for (Album album : albumes) {
-                    if (eliminarAlbum.equals(album)) {
-                        
-                    }
-                }
+                albumes.remove(eliminarAlbum);
+                JOptionPane.showMessageDialog(jd_albumes, "Album eliminado");
+                recargarListasAlbum();
             } catch (Exception e) {
+                System.out.println("Error al eliminar album");
+                e.printStackTrace();
             }
         }else{
             JOptionPane.showMessageDialog(jd_albumes, "Seleccione un elemento");
@@ -1249,6 +1291,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_explorarMouseExited
 
     private void lb_explorarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_explorarMouseClicked
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Album album : albumes) {
+            modelo.addElement(album);
+        }
+        cb_albumes.setModel(modelo);
         jd_explorar.pack();
         jd_explorar.setModal(true);
         jd_explorar.setLocationRelativeTo(null);
@@ -1310,6 +1357,9 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mi_FavoritosActionPerformed
 
+    
+    
+    
     private void bt_añadirCancionaPlaylistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_añadirCancionaPlaylistMouseClicked
         try {
             DefaultComboBoxModel modelo  = (DefaultComboBoxModel)cb_playList.getModel();
@@ -1437,8 +1487,81 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mi_eliminarActionPerformed
 
     
+    
+    //Eliminar usuarios
+    private void bt_EliminarusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_EliminarusuarioMouseClicked
+        if (jl_eliminarUsuarios.getSelectedIndex()>-1) {
+            DefaultListModel modelo = (DefaultListModel)jl_eliminarUsuarios.getModel();
+            Usuario eliminar = (Usuario)modelo.getElementAt(jl_eliminarUsuarios.getSelectedIndex());
+            Usuarios.remove(eliminar);
+            JOptionPane.showMessageDialog(jd_Usuarios, "Usuario eliminado");
+            recargarListasUsuario();
+        }else{
+            JOptionPane.showMessageDialog(jd_Usuarios, "Escoga un usuario");
+        }
+    }//GEN-LAST:event_bt_EliminarusuarioMouseClicked
 
     
+    //Guardar
+    private void lb_gardarUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_gardarUsuariosMouseEntered
+        lb_gardarUsuarios.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lb_gardarUsuariosMouseEntered
+
+    private void lb_gardarUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_gardarUsuariosMouseExited
+        lb_gardarUsuarios.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lb_gardarUsuariosMouseExited
+
+    private void lb_gardarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_gardarUsuariosMouseClicked
+        Administrador adm = new Administrador();
+        adm.setAlbumes(albumes);
+        adm.setUsuarios(Usuarios);
+        adm.Escribir();
+    }//GEN-LAST:event_lb_gardarUsuariosMouseClicked
+
+    
+    //Cargar
+    private void lb_cargarUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cargarUsuariosMouseEntered
+        lb_cargarUsuarios.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lb_cargarUsuariosMouseEntered
+
+    private void lb_cargarUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cargarUsuariosMouseExited
+        lb_cargarUsuarios.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lb_cargarUsuariosMouseExited
+
+    private void lb_cargarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cargarUsuariosMouseClicked
+        try {
+            Administrador admin;
+            admin = administrador.Cargar();
+            this.Usuarios = admin.getUsuarios();
+            this.albumes = admin.getAlbumes();
+            JOptionPane.showMessageDialog(this, "Archivos cargados");
+        } catch (Exception e) {
+            System.out.println("Error al cargar el archivo en el main");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_lb_cargarUsuariosMouseClicked
+
+    
+
+    public void recargarListasUsuario(){
+        DefaultListModel modeloListaEliminar = new DefaultListModel();
+        DefaultListModel modeloListaListar = new DefaultListModel();
+        for (Usuario Usuario : Usuarios) {
+            modeloListaEliminar.addElement(Usuario);
+            modeloListaListar.addElement(Usuario);
+        }
+        jl_listarUsuarios.setModel(modeloListaListar);
+        jl_eliminarUsuarios.setModel(modeloListaEliminar);
+    }
+    
+    public void recargarListasAlbum(){
+        DefaultListModel modelo = new DefaultListModel();
+        for (Album album : albumes) {
+            modelo.addElement(album);
+        }
+        jl_listarAlbumes.setModel(modelo);
+        jl_eliminarAlbum.setModel(modelo);
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1482,6 +1605,7 @@ public class Principal extends javax.swing.JFrame {
         return null;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_Eliminarusuario;
     private javax.swing.JButton bt_LogIn;
     private javax.swing.JButton bt_agregarAlbum;
     private javax.swing.JButton bt_agregarUsuario;
@@ -1494,7 +1618,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_albumes;
     private javax.swing.JComboBox<String> cb_genero;
     private javax.swing.JComboBox<String> cb_playList;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1510,14 +1633,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1556,13 +1676,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_cancionesdelAlbum;
     private javax.swing.JList<String> jl_eliminarAlbum;
     private javax.swing.JList<String> jl_eliminarUsuarios;
+    private javax.swing.JList<String> jl_listarAlbumes;
     private javax.swing.JList<String> jl_listarUsuarios;
     private javax.swing.JTree jtree_playList;
     private javax.swing.JLabel lb_CrearPlayList;
     private javax.swing.JLabel lb_LogIn;
     private javax.swing.JLabel lb_albums;
     private javax.swing.JLabel lb_canciones;
+    private javax.swing.JLabel lb_cargarUsuarios;
     private javax.swing.JLabel lb_explorar;
+    private javax.swing.JLabel lb_gardarUsuarios;
     private javax.swing.JLabel lb_usuarios;
     private javax.swing.JLabel lb_verPlayList;
     private javax.swing.JMenuItem mi_Favoritos;
