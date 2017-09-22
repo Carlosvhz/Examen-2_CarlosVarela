@@ -88,7 +88,7 @@ public class Principal extends javax.swing.JFrame {
         lb_explorar = new javax.swing.JLabel();
         lb_CrearPlayList = new javax.swing.JLabel();
         lb_verPlayList = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lb_verFavoritos = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jd_explorar = new javax.swing.JDialog();
         jPanel13 = new javax.swing.JPanel();
@@ -622,11 +622,19 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("jLabel16");
+        lb_verFavoritos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_verFavoritos.setText("Ver favoritos");
+        lb_verFavoritos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_verFavoritosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lb_verFavoritosMouseExited(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("jLabel16");
+        jLabel20.setText("Salir");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -638,7 +646,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(lb_CrearPlayList)
                     .addComponent(lb_explorar, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_verPlayList, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_verFavoritos, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(178, Short.MAX_VALUE))
         );
@@ -652,7 +660,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lb_verPlayList)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel19)
+                .addComponent(lb_verFavoritos)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel20)
                 .addContainerGap(59, Short.MAX_VALUE))
@@ -703,6 +711,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jScrollPane5.setViewportView(jl_cancionesdelAlbum);
+
+        cb_albumes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cb_albumesMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1121,6 +1135,8 @@ public class Principal extends javax.swing.JFrame {
     
     private void lb_LogInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_LogInMouseClicked
         if (usuarioActivado==null) {
+            tf_userNameLogIn.setText("");
+            pf_contraseñaLogIn.setText("");
             jd_LogIn.pack();
             jd_LogIn.setModal(true);
             jd_LogIn.setLocationRelativeTo(null);
@@ -1141,11 +1157,13 @@ public class Principal extends javax.swing.JFrame {
             usuarioActivado = verificarCuenta(tf_userNameLogIn.getText(), pf_contraseñaLogIn.getText());
             if (usuarioActivado!=null) {
                 JOptionPane.showMessageDialog(jd_LogIn, "Bienvenido "+usuarioActivado.getNombre());
-                
                 tf_userNameLogIn.setText("");
                 pf_contraseñaLogIn.setText("");
                 jd_LogIn.dispose();
-                
+                jd_SubMenu.pack();
+                jd_SubMenu.setModal(true);
+                jd_SubMenu.setLocationRelativeTo(null);
+                jd_SubMenu.setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(jd_LogIn, "Username o contraseña incorrectas");
@@ -1188,12 +1206,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_cancionesMouseExited
 
     private void lb_cancionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_cancionesMouseClicked
-        if (usuarioActivado!=null) {
-            if (albumes.size()>0) {
-                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-                for (Album album : albumes) {
-                    modelo.addElement(album);
-                }
+        if (albumes.size()>0) {
+           DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+           for (Album album : albumes) {
+               modelo.addElement(album);
+            }
                 cb_albumCancion.setModel(modelo);
                 
                 tf_nombreCancion.setText("");
@@ -1207,9 +1224,6 @@ public class Principal extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(this, "No hay suficientes albumes");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Inicie sesion");
-        }
     }//GEN-LAST:event_lb_cancionesMouseClicked
 
     private void bt_guardarCancionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_guardarCancionMouseClicked
@@ -1237,15 +1251,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_albumsMouseExited
 
     private void lb_albumsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_albumsMouseClicked
-        if (usuarioActivado!=null) {
+
             recargarListasAlbum();
             jd_albumes.pack();
             jd_albumes.setModal(true);
             jd_albumes.setLocationRelativeTo(null);
             jd_albumes.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this, "Inicie sesion");
-        }
     }//GEN-LAST:event_lb_albumsMouseClicked
 
     private void bt_agregarAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarAlbumMouseClicked
@@ -1304,7 +1315,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jl_cancionesdelAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_cancionesdelAlbumMouseClicked
         if (evt.isMetaDown()) {
-            if (jl_cancionesdelAlbum.getSelectedIndex()>0) {
+            if (jl_cancionesdelAlbum.getSelectedIndex()>-1) {
                 try {
                     ppm_playlistFavoritos.show(jl_cancionesdelAlbum,evt.getX(),evt.getY());
                 } catch (Exception e) {
@@ -1391,9 +1402,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_CrearPlayListMouseExited
 
     private void lb_CrearPlayListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_CrearPlayListMouseClicked
+        DefaultListModel modelo = new DefaultListModel();
+        for (Album album : albumes) {
+            for (Cancion cancion : album.getCanciones()) {
+                modelo.addElement(cancion);
+            }
+        }
+        jl_añadirCanciones.setModel(modelo);
         cancionañadir = null;
         canciones = new ArrayList();
-        
         jd_añadirPlayList.pack();
         jd_añadirPlayList.setModal(true);
         jd_añadirPlayList.setLocationRelativeTo(null);
@@ -1405,6 +1422,7 @@ public class Principal extends javax.swing.JFrame {
             DefaultListModel modelo = (DefaultListModel)jl_añadirCanciones.getModel();
             cancionañadir = (Cancion)modelo.getElementAt(jl_añadirCanciones.getSelectedIndex());
             canciones.add(cancionañadir);
+            JOptionPane.showMessageDialog(jd_añadirPlayList, "Cancion añadida");
         }else{
             JOptionPane.showMessageDialog(jd_añadirPlayList, "Seleccione una cancion");
         }
@@ -1461,11 +1479,7 @@ public class Principal extends javax.swing.JFrame {
     private void jtree_playListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtree_playListMouseClicked
         if (evt.isMetaDown()) {
             try {
-                DefaultTreeModel modelo = (DefaultTreeModel)jtree_playList.getModel();
-                Object objeto = jtree_playList.getSelectionPath().getLastPathComponent();
-                if (objeto instanceof Cancion) {
-                    ppm_Eliminar.show(jtree_playList, evt.getX(), evt.getY());
-                }
+                ppm_Eliminar.show(jtree_playList, evt.getX(), evt.getY());
             } catch (Exception e) {
                 System.out.println("Error al obtener nodo en Jtree de vista de playList");
                 e.printStackTrace();
@@ -1478,8 +1492,14 @@ public class Principal extends javax.swing.JFrame {
             DefaultTreeModel modelo = (DefaultTreeModel)jtree_playList.getModel();
             Object objeto = jtree_playList.getSelectionPath().getLastPathComponent();
             DefaultMutableTreeNode n = (DefaultMutableTreeNode)objeto;
-            n.removeFromParent();
-            modelo.reload();
+            DefaultMutableTreeNode padre = (DefaultMutableTreeNode)n.getParent();
+            if (n.getUserObject() instanceof Cancion) {
+                PlayList playList = (PlayList)padre.getUserObject();
+                Cancion cancion = (Cancion)n.getUserObject();
+                playList.getCanciones().remove(cancion);
+                n.removeFromParent();
+                modelo.reload();
+            }
         } catch (Exception e) {
             System.out.println("Error al eliminar objeto en Jtree de vista de playList");
             e.printStackTrace();
@@ -1516,6 +1536,7 @@ public class Principal extends javax.swing.JFrame {
         adm.setAlbumes(albumes);
         adm.setUsuarios(Usuarios);
         adm.Escribir();
+        JOptionPane.showMessageDialog(this, "Archivo guardado");
     }//GEN-LAST:event_lb_gardarUsuariosMouseClicked
 
     
@@ -1540,6 +1561,34 @@ public class Principal extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_lb_cargarUsuariosMouseClicked
+
+    
+    //Combobox de albumes
+    private void cb_albumesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_albumesMouseClicked
+        if (cb_albumes.getSelectedIndex()>=0) {
+            try {
+                Album album = (Album)cb_albumes.getSelectedItem();
+                DefaultListModel modelo = new DefaultListModel();
+                for (Cancion cancion : album.getCanciones()) {
+                    modelo.addElement(cancion);
+                }
+                jl_cancionesdelAlbum.setModel(modelo);
+            } catch (Exception e) {
+                System.out.println("Error al darle click al combobox de albumes");
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_cb_albumesMouseClicked
+
+    
+    //Ver favoritos
+    private void lb_verFavoritosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_verFavoritosMouseEntered
+        lb_verFavoritos.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lb_verFavoritosMouseEntered
+
+    private void lb_verFavoritosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_verFavoritosMouseExited
+        lb_verFavoritos.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lb_verFavoritosMouseExited
 
     
 
@@ -1595,7 +1644,6 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
-    
     public Usuario verificarCuenta(String username, String password){
         for (Usuario u : Usuarios) {
             if (u.getUsername().equals(username)&&u.getPassword().equals(password)) {
@@ -1627,7 +1675,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -1687,6 +1734,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lb_explorar;
     private javax.swing.JLabel lb_gardarUsuarios;
     private javax.swing.JLabel lb_usuarios;
+    private javax.swing.JLabel lb_verFavoritos;
     private javax.swing.JLabel lb_verPlayList;
     private javax.swing.JMenuItem mi_Favoritos;
     private javax.swing.JMenuItem mi_eliminar;

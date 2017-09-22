@@ -34,5 +34,11 @@ public class Album implements Serializable{
     public void añadirCancion (Cancion cancion){
         this.canciones.add(cancion);
     }
+
+    @Override
+    public String toString() {
+        return "Album: "+nombre+"| Artista: "+artista;
+    }
+    
     
 }
